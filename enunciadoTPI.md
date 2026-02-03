@@ -34,9 +34,7 @@ Angular CLI (opcional, si se desea ejecutar comandos ng directamente).
 3- Configurar Variables de Entorno (.env): Cree un archivo llamado .env en la raíz del proyecto (al mismo nivel que package.json) y pegue el siguiente contenido, ajustando la contraseña de su base de datos si es necesario:
 PORT=3000
 NODE_ENV=development
-
-# Reemplace 'root' y 'root' por su usuario y contraseña de MySQL
-
+(Reemplace 'root' y 'root' por su usuario y contraseña de MySQL)
 DATABASE_URL=mysql://root:root@localhost:3306/restaurante_dsw
 SECRET_JWT_KEY=ClaveSecretaSuperSegura123
 SALT_ROUNDS=10

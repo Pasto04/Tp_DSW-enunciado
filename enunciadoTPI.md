@@ -17,13 +17,32 @@
 
 ### Instrucciones
 
-Backend:
+1. Prerrequisitos Previos
+   Antes de iniciar, asegúrese de tener instalado en su equipo:
+
+Node.js (versión LTS recomendada).
+Git.
+MySQL Server (y que el servicio esté en ejecución).
+Angular CLI (opcional, si se desea ejecutar comandos ng directamente).
+
+2. Instalación y Ejecución del Backend
 
 1- Clonar el proyecto back-end en nuestro dispositivo. Para ello nos dirigimos al repositorio, presionamos "Code" y copiamos la URL del mismo. Luego, utilizamos la URL para clonar el repositorio con nuestro editor de código preferido (Para Visual Studio Code: >Git: Clone. Luego ingresamos la URL copiada).
 
 2- Una vez descargado el proyecto, ingresamos el comando "pnpm install" en la terminal para descargar todas las dependencias necesarias para la ejecución del back-end.
 
-3- Finalmente, escribimos el comando "pnpm start:dev" para iniciar el back-end.
+3- Configurar Variables de Entorno (.env): Cree un archivo llamado .env en la raíz del proyecto (al mismo nivel que package.json) y pegue el siguiente contenido, ajustando la contraseña de su base de datos si es necesario:
+PORT=3000
+NODE_ENV=development
+
+# Reemplace 'root' y 'root' por su usuario y contraseña de MySQL
+
+DATABASE_URL=mysql://root:root@localhost:3306/restaurante_dsw
+SECRET_JWT_KEY=ClaveSecretaSuperSegura123
+SALT_ROUNDS=10
+ALLOWED_ORIGINS=http://localhost:4200
+
+4- Iniciar el Servidor: Una vez configurada la base de datos, inicie el servidor en modo desarrollo: pnpm start:dev
 
 Frontend:
 

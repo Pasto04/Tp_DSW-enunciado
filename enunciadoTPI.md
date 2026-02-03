@@ -32,12 +32,19 @@ Angular CLI (opcional, si se desea ejecutar comandos ng directamente).
 2- Una vez descargado el proyecto, ingresamos el comando "pnpm install" en la terminal para descargar todas las dependencias necesarias para la ejecución del back-end.
 
 3- Configurar Variables de Entorno (.env): Cree un archivo llamado .env en la raíz del proyecto (al mismo nivel que package.json) y pegue el siguiente contenido, ajustando la contraseña de su base de datos si es necesario:
+
 PORT=3000
+
 NODE_ENV=development
+
 (Reemplace 'root' y 'root' por su usuario y contraseña de MySQL)
+
 DATABASE_URL=mysql://root:root@localhost:3306/restaurante_dsw
+
 SECRET_JWT_KEY=ClaveSecretaSuperSegura123
+
 SALT_ROUNDS=10
+
 ALLOWED_ORIGINS=http://localhost:4200
 
 4- Iniciar el Servidor: Una vez configurada la base de datos, inicie el servidor en modo desarrollo: pnpm start:dev

@@ -4,17 +4,16 @@
 
 ### Integrantes
 
-| Legajo | Apellido  | Nombre/s      |
-| :----- | :-------- | ------------- |
-| 51278  | Giraudo   | Mauro Facundo |
-| 50469  | Pastorino | Juan José     |
-| 50707  | González  | Tomás         |
+| Legajo | Apellido  | Nombre/s  |
+| :----- | :-------- | --------- |
+| 50469  | Pastorino | Juan José |
+| 50707  | González  | Tomás     |
 
 ### Repositorios
 
-- [backend app](https://github.com/MauroGiraudo/tp_DSW_backend)
+- [backend app](https://github.com/Pasto04/Prubea_Deploy_Back)
 
-* [frontend app](https://github.com/MauroGiraudo/tp_DSW_frontend)
+* [frontend app](https://github.com/Pasto04/Prueba_Deploy_Front)
 
 ### Instrucciones
 

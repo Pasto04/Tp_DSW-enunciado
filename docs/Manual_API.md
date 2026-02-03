@@ -1,305 +1,296 @@
 # Manual API "Alma Criolla"
 
+Versión del Documento: 1.0.0 Fecha de Actualización: 03/02/2026 Tecnología: Node.js, Express, MikroORM, MySQL.
+
+1. Información General
+   URL Base (Desarrollo): http://localhost:3000/api
+   URL Base (Producción): https://prueba-deploy-back-2u9b.onrender.com
+
+Autenticación:
+
+El sistema utiliza JWT (JSON Web Tokens).
+
+El token debe enviarse en la Cookie token (manejada automáticamente por el navegador) o en el Header Authorization: Bearer <token> para clientes externos.
+
+Formato de Respuesta: Todas las respuestas devuelven un JSON estandarizado: { "message": string, "data": ... }.
+
 ## Entidades:
 
 ### Proveedor
 
 {
-id?: number
+id: number
 
-cuit!: string
+cuit: string
 
-razonSocial!: string
+razonSocial: string
 
-direccion!: string
+direccion: string
 
-ciudad!: string
+ciudad: string
 
-provincia!: string
+provincia: string
 
-pais!: string
+pais: string
 
-telefono!: string
+telefono: string
 
-email!: string
-
-ingredienteDeProveedor = new Collection<IngredienteDeProveedor>(this)
-
-bebidasDeProveedor = new Collection<BebidaDeProveedor>(this)
+email: string
 }
 
 ### Bebida
 
 {
-codBebida?: number
+codBebida: number
 
-descripcion!: string
+descripcion: string
 
-stock!: number
+stock: number
 
-unidadMedida!: string
+unidadMedida: string
 
-contenido!: number
+contenido: number
 
-precio!: number
+precio: number
 
-alcohol?: string
+alcohol: string
 
-imagen?: string | null
+imagen: string (URL) | null
 
-bebidasPedido = new Collection<BebidaPedido>(this)
-
-bebidasDeProveedor = new Collection<BebidaDeProveedor>(this)
 }
 
 ### BebidaDeProveedor
 
 {
-bebida!: Rel<Bebida>
+bebida: ID Bebida
 
-proveedor!: Rel<Proveedor>
+proveedor: ID Proveedor
 }
 
 ### Ingrediente
 
 {
-codigo?: number
+codigo: number
 
-descIngre!: string
+descIngre: string
 
-puntoDePedido!: number
+puntoDePedido: number
 
-stock!: number
+stock: number
 
-unidadMedida!: string
+unidadMedida: string
 
-aptoCeliacos!: boolean
+aptoCeliacos: boolean
 
-aptoVegetarianos!: boolean
+aptoVegetarianos: boolean
 
-aptoVeganos!: boolean
-
-elaboracionesPlato = new Collection<ElaboracionPlato>(this)
-
-ingredienteDeProveedor = new Collection<IngredienteDeProveedor>(this)
+aptoVeganos: boolean
 }
 
 ### IngredienteDeProveedor
 
 {
-ingrediente!: Rel<Ingrediente>
+ingrediente: ID Ingrediente
 
-proveedor!: Rel<Proveedor>
+proveedor: ID Proveedor
 }
 
 ### TipoPlato
 
 {
-numPlato?: number
+numPlato: number
 
-descTPlato!: string
-
-platos = new Collection<Plato>(this)
+descTPlato: string
 }
 
 ### Plato
 
 {
-numPlato?: number
+numPlato: number
 
-descripcion!: string
+descripcion: string
 
-tiempo!: number
+tiempo: number
 
-precio!: number
+precio: number
 
-aptoCeliacos!: boolean
+aptoCeliacos: boolean
 
-aptoVegetarianos!: boolean
+aptoVegetarianos: boolean
 
-aptoVeganos!: boolean
+aptoVeganos: boolean
 
-imagen?: string
+imagen: string
 
-tipoPlato!: Rel<TipoPlato>
+tipoPlato: ID TipoPlato
 
-elaboracionesPlato = new Collection<ElaboracionPlato>(this)
+elaboracionesPlato: ElaboracionPlato[]
 
-platoPedidos = new Collection<PlatoPedido>(this)
 }
 
 ### ElaboracionPlato
 
 {
-ingrediente!: Rel<Ingrediente>
+ingrediente: ID Ingrediente
 
-plato!: Rel<Plato>
+plato: ID Plato
 
-cantidadNecesaria!: number
+cantidadNecesaria: number
 }
 
 ### Usuario
 
 {
-id?: number
+id: number
 
-nombre!: string
+nombre: string
 
-apellido!: string
+apellido: string
 
-email!: string
+email: string
 
-contrasenia!: string
+contrasenia: string
 
-telefono?: string
+telefono: string
 
-tipoUsuario!: string
-
-pedidos = new Collection<Pedido>(this)
-
-tarjetasCliente = new Collection<TarjetaCliente>(this)
+tipoUsuario: string
 }
 
 ### Mesa
 
 {
-nroMesa?: number
+nroMesa: number
 
-cantPersonasMax!: number
+cantPersonasMax: number
 
-estado!: string
-
-pedidos = new Collection<Pedido>(this);
+estado: string
 }
 
 ### Pedido
 
 {
-nroPed?: number
+nroPed: number
 
 estado: string = 'en curso'
 
-fecha?: Date
+fecha: Date
 
-hora?: string
+hora: string
 
-fechaCancelacion?: Date
+fechaCancelacion: Date
 
-horaCancelacion?: string
+horaCancelacion: string
 
-cliente!: Rel<Usuario>
+cliente: ID Usuario
 
-mesa!: Rel<Mesa>
+mesa: ID Mesa
 
-platosPedido = new Collection<PlatoPedido>(this)
+platosPedido: PlatoPedido[]
 
-bebidasPedido = new Collection<BebidaPedido>(this)
+bebidasPedido: BebidaPedido[]
 
-pago?: Rel<Pago>
+pago: ID pago
 
-resena?: Rel<Resena>
+resena: ID resena
 }
 
 ### PlatoPedido
 
 {
-pedido!: Rel<Pedido>
+pedido: ID Pedido
 
-plato!: Rel<Plato>
+plato: ID Plato
 
-fechaSolicitud?: Date
+fechaSolicitud: Date
 
-horaSolicitud?: string
+horaSolicitud: string
 
-cantidad!: number
+cantidad: number
 
-fechaEntrega?: Date
+fechaEntrega: Date
 
-horaEntrega?: string
+horaEntrega: string
 
-entregado?: boolean = false
+entregado: boolean = false
 }
 
 ### BebidaPedido
 
 {
-bebida!: Rel<Bebida>
+bebida: ID Bebida
 
-pedido!: Rel<Pedido>
+pedido: ID Pedido
 
-fechaSolicitud?: Date
+fechaSolicitud: Date
 
-horaSolicitud?: string
+horaSolicitud: string
 
-cantidad!: number
+cantidad: number
 
-fechaEntrega?: Date
+fechaEntrega: Date
 
-horaEntrega?: string
+horaEntrega: string
 
-entregado?: boolean = false
+entregado: boolean = false
 }
 
 ### Tarjeta
 
 {
-idTarjeta?: number
+idTarjeta: number
 
-descTarjeta!: string
+descTarjeta: string
 
-tarjetaClientes = new Collection<TarjetaCliente>(this)
 }
 
 ### TarjetaCliente
 
 {
-nroTarjeta!: string;
+nroTarjeta: string
 
-tipoTarjeta!: string;
+tipoTarjeta: string
 
-bancoTarjeta!: string;
+bancoTarjeta: string
 
-titular!: string;
+titular: string
 
-vencimiento!: Date;
+vencimiento: Date
 
-codSeguridad!: number;
+codSeguridad: number
 
-tarjeta!: Rel<Tarjeta>;
+tarjeta: ID Tarjeta
 
-pagos = new Collection<Pago>(this)
-
-cliente!: Rel<Usuario>
+cliente: ID Usuario
 }
 
 ### Pago
 
 {
-pedido!: Rel<Pedido>;
+pedido: ID Pedido
 
-idPago!: string
+idPago: string
 
-fechaPago?: Date
+fechaPago: Date
 
-horaPago?: string
+horaPago: string
 
-importe!: number
+importe: number
 
-tarjetaCliente?: Rel<TarjetaCliente>
+tarjetaCliente: Nro TarjetaCliente
 }
 
 ### Resena
 
 {
-pedido!: Rel<Pedido>
+pedido: ID Pedido
 
-fechaHoraResena?: Date
+fechaHoraResena: Date
 
-fechaHoraModificacion?: Date
+fechaHoraModificacion: Date
 
-cuerpo!: string
+cuerpo: string
 
-puntaje!: number
+puntaje: number
 }
 
 ## End-Points:
@@ -336,7 +327,7 @@ puntaje!: number
 
 - Función: Actualiza un proveedor existente, según el "id" ingresado, haciendo uso de los datos enviados
 
-- request.body = Proveedor?
+- request.body = Proveedor
 
 - response.body = {message: string, data: Proveedor}
 
@@ -380,7 +371,7 @@ puntaje!: number
 
 - Función: Actualiza un tipo de plato existente, según el "numPlato" ingresado, haciendo uso de los datos enviados
 
-- request.body = TipoPlato?
+- request.body = TipoPlato
 
 - response.body = {message: string, data: TipoPlato}
 
@@ -424,7 +415,7 @@ puntaje!: number
 
 - Función: Actualiza un plato existente, según el "numPlato" ingresado, haciendo uso de los datos enviados
 
-- request.body = Plato?
+- request.body = Plato
 
 - response.body = {message: string, data: Plato}
 
@@ -468,7 +459,7 @@ puntaje!: number
 
 - Función: Actualiza un ingrediente existente, según el "cod" ingresado, haciendo uso de los datos enviados
 
-- request.body = Ingrediente?
+- request.body = Ingrediente
 
 - response.body = {message: string, data: Ingrediente}
 
@@ -512,7 +503,7 @@ puntaje!: number
 
 - Función: Actualiza una tarjeta existente, según el "idTarjeta" ingresado, haciendo uso de los datos enviados
 
-- request.body = Tarjeta?
+- request.body = Tarjeta
 
 - response.body = {message: string, data: Tarjeta}
 
@@ -542,7 +533,7 @@ puntaje!: number
 
 - request.body = Bebida
 
-- response.body = Bebida
+- response.body = {message: string, data: Bebida}
 
 ### PUT /api/bebidas/:codBebida
 
@@ -556,7 +547,7 @@ puntaje!: number
 
 - Función: Actualiza una bebida existente, según el "codBebida" ingresado, haciendo uso de los datos enviados
 
-- request.body = Bebida?
+- request.body = Bebida
 
 - response.body = {message: string, data: Bebida}
 
@@ -585,7 +576,7 @@ puntaje!: number
 
 - request.body = Mesa
 
-- response.body = Mesa
+- response.body = {message: string, data: Mesa}
 
 ### PUT /api/mesas/:nroMesa
 
@@ -599,7 +590,7 @@ puntaje!: number
 
 - Función: Actualiza una mesa existente, según el "nroMesa" ingresado, haciendo uso de los datos enviados
 
-- request.body = Mesa?
+- request.body = Mesa
 
 - response.body = {message: string, data: Mesa}
 
@@ -608,50 +599,37 @@ puntaje!: number
 - Función: Elimina una mesa del sistema según el "nroMesa" ingresado
 
 - response.body = {message: string, data: Mesa}
-  ##################################################################################################################################################################
 
-### GET /api/usuario
+##################################################################################################################################################################
 
-- Función: Devuelve todas los usuarios registradas en el sistema
+### GET /api/usuarios
 
-- response.body = {message: string, data: Mesa[]}
+- Función: Devuelve todos los usuarios registrados en el sistema (Solo Admin)
+- response.body = {message: string, data: Usuario[]}
 
-### GET /api/mesas/:id
+### GET /api/usuarios/:id
 
-- Función: Devuelve una única mesa según el "id" ingresado
+- Función: Devuelve un único usuario según el "id" ingresado
+- response.body = {message: string, data: Usuario}
 
-- response.body = {message: string, data: Mesa}
+### POST /api/usuarios/registro
 
-### POST /api/mesas
+- Función: Registra un nuevo usuario (Registro de cliente o alta de empleado)
+- request.body = Usuario (Sin ID)
+- response.body = {message: string, data: Usuario}
 
-- Función: Registra una nueva mesa en el sistema
+### PUT /api/usuarios/:id
 
-- request.body = Mesa
+- Función: Actualiza un usuario existente
+- request.body = Usuario
+- response.body = {message: string, data: Usuario}
 
-- response.body = Mesa
+### DELETE /api/usuarios/:id
 
-### PUT /api/mesas/:id
+- Función: Elimina un usuario del sistema
+- response.body = {message: string, data: Usuario}
 
-- Función: Actualiza una mesa existente haciendo uso de los datos enviados
-
-- request.body = Mesa
-
-- response.body = {message: string, data: Mesa}
-
-### PATCH /api/mesas/:id
-
-- Función: Actualiza una mesa existente, según el "id" ingresado, haciendo uso de los datos enviados
-
-- request.body = Mesa?
-
-- response.body = {message: string, data: Mesa}
-
-### DELETE /api/mesas/:id
-
-- Función: Elimina una mesa del sistema según el "id" ingresado
-
-- response.body = {message: string, data: Mesa}
-  ##################################################################################################################################################################
+##################################################################################################################################################################
 
 ### GET /api/clientes/:id/tarjetas
 
@@ -704,6 +682,8 @@ puntaje!: number
 
 - Función: Registra una nueva reseña del cliente en el sistema
 
+- request.body = { pedido: ID Pedido, cuerpo: string, puntaje: number }
+
 - response.body = {
   message: string,
   data: {
@@ -736,7 +716,9 @@ puntaje!: number
 
 ### PUT /api/clientes/:id/pedidos/:nroPed/resena
 
-- Función: Actualiza una tarjeta del cliente existente haciendo uso de los datos enviados
+- Función: Actualiza una reseña del cliente existente haciendo uso de los datos enviados
+
+- request.body = { pedido: ID Pedido, cuerpo: string, puntaje: number }
 
 - response.body = {
   message: string,
@@ -770,7 +752,7 @@ puntaje!: number
 
 ### DELETE /api/clientes/:id/pedidos/:nroPed/resena
 
-- Función: Elimina una tarjeta del cliente del sistema según el "id" ingresado
+- Función: Elimina una reseña del cliente del sistema según el "id" ingresado
 
 - response.body = {message: string, data: Resena}
   ##################################################################################################################################################################
